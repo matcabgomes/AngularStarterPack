@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { DetalheComponent } from './home/detalhe/detalhe.component';
 
 
 const routes: Routes = [
@@ -9,6 +10,13 @@ const routes: Routes = [
     children: [
       {
         path: "", component: HomeComponent
+      },
+      {
+        path: "detalhe/:id", children: [
+          {
+            path: "", component: DetalheComponent
+          }
+        ]
       }
     ]
   }

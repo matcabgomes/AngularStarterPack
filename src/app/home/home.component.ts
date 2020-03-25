@@ -10,7 +10,7 @@ import { Meta } from '../shared/models/meta';
 })
 export class HomeComponent implements OnInit {
 
-  posts: Meta<Post>;
+  posts: Meta<Post> = {} as Meta<Post>;
 
   constructor(private postService: PostService) { }
 

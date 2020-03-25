@@ -9,6 +9,9 @@ import { SidebarComponent } from './shared/estrutura/sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { InterceptorService } from './shared/service/interceptor.service';
+import { TrucatePipe } from './shared/pipes/trucate.pipe';
+import { DetalheComponent } from './home/detalhe/detalhe.component';
+import { ComentarioComponent } from './home/comentario/comentario.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { InterceptorService } from './shared/service/interceptor.service';
     CabecalhoComponent,
     RodapeComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    TrucatePipe,
+    DetalheComponent,
+    ComentarioComponent
   ],
   imports: [
     BrowserModule,
