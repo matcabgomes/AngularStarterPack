@@ -1,9 +1,13 @@
-
+<!-- Comments
+================================================== -->
 <div id="comments">
+
+    <h3>{{ comentarios._meta?.totalCount }} Comments</h3>
+
     <!-- commentlist -->
-    <ol class="commentlist" >
-        
-        <li class="depth-1" *ngFor="let comentario of comentarios.result">
+    <ol class="commentlist">
+
+        <li class="depth-1" *ngFor="let comment of comentarios.result">
 
             <div class="avatar">
                 <img width="50" height="50" class="avatar" src="assets/images/user-01.png" alt="">
@@ -12,55 +16,74 @@
             <div class="comment-content">
 
                 <div class="comment-info">
-                    <cite>   {{ comentario.name }}</cite>
+                    <cite>{{ comment.name }}</cite>
 
                     <div class="comment-meta">
-                     {{ comentario.email }}
+                        <time class="comment-time" datetime="2014-07-12T23:05">{{ comment.email }}</time>
+                        <span class="sep">/</span><a class="reply" href="#">Reply</a>
                     </div>
                 </div>
 
-                <div class="comment-text">
-                    <p> {{ comentario.body }}</p>
+                <div class="comment-text">{{ comment.body }}
                 </div>
 
             </div>
 
         </li>
 
-</ol> <!-- Commentlist End -->
+    </ol> <!-- Commentlist End -->
 
-<div class="respond">
+    <!-- respond -->
+    <div class="respond">
 
-    <h3>Leave a Comment</h3>
+        <h3>Leave a Comment</h3>
 
-    <!-- form -->
-    <form name="contactForm" id="contactForm" method="post" action="">
-           <fieldset>
+        <!-- form -->
+        <form name="contactForm" id="contactForm" [formGroup]="contactForm" method="post" (ngSubmit)="onSubmit()">
+            <fieldset>
 
-       <div class="group">
-                  <label for="cName">Name <span class="required">*</span></label>
-                  <input name="cName" type="text" id="cName" size="35" value="" />
-       </div>
+                <div class="group">
+                    <label for="cName">Name <span class="required">*</span></label>
+                    <input name="cName" type="text" id="cName" size="35" value="" formControlName="name" required />
+                    <div *ngIf="!name.pristine && name.errors">
+                        <p *ngIf="name.errors.required">
+                            Nome é obrigatório
+                        </p>
+                        <p *ngIf="name.errors.minLength">
+                            Nome pequeno demais
+                        </p>
+                        <p *ngIf="name.errors.maxLength">
+                            Nome deve ter no máximo 100 caracteres
+                        </p>
+                    </div>
+                </div>
 
-       <div class="group">
-                  <label for="cEmail">Email <span class="required">*</span></label>
-                  <input name="cEmail" type="text" id="cEmail" size="35" value="" />
-       </div>
+                <div class="group">
+                    <label for="cEmail">Email <span class="required">*</span></label>
+                    <input name="cEmail" type="text" id="cEmail" size="35" value="" formControlName="email" />
+                    <div *ngIf="!email.pristine && email.errors">
+                        <p *ngIf="email.errors.email">
+                            Email inválido
+                        </p>
+                        <p *ngIf="email.errors.required">
+                            Email é obrigatório
+                        </p>
+                    </div>
+                </div>
 
-       <div class="group">
-                  <label for="cWebsite">Website</label>
-                  <input name="cWebsite" type="text" id="cWebsite" size="35" value="" />
-       </div>
+                <div class="message group">
+                    <label for="cMessage">Message <span class="required">*</span></label>
+                    <textarea name="cMessage" id="cMessage" rows="10" cols="50" formControlName="body"></textarea>
+                </div>
 
-       <div class="message group">
-          <label  for="cMessage">Message <span class="required">*</span></label>
-          <textarea name="cMessage"  id="cMessage" rows="10" cols="50" ></textarea>
-       </div>
+                <button type="submit" class="submit">Submit</button>
 
-       <button type="submit" class="submit">Submit</button>
+            </fieldset>
+        </form> <!-- Form End -->
 
-           </fieldset>
-          </form> <!-- Form End -->
+        {{ contactForm.value | json }}
+        {{ contactForm.valid | json }}
 
- </div> <!-- Respond End -->
-</div>
+    </div> <!-- Respond End -->
+
+</div> <!-- Comments End -->

@@ -22,7 +22,7 @@ export class DetalheComponent implements OnInit {
     this.buscarPost();
   }
 
-  buscarPost(): void{
+  buscarPost(): void {
     this.postService.getPostById(this.postId).subscribe((post: Post) => {
       this.post = post;
     });

@@ -12,6 +12,7 @@ import { InterceptorService } from './shared/service/interceptor.service';
 import { TrucatePipe } from './shared/pipes/trucate.pipe';
 import { DetalheComponent } from './home/detalhe/detalhe.component';
 import { ComentarioComponent } from './home/comentario/comentario.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,8 @@ import { ComentarioComponent } from './home/comentario/comentario.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

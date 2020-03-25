@@ -25,5 +25,12 @@ export class ComentarioService {
     retry(2), 
     catchError(this.handleError));
  }
- 
+
+ saveComentario(comentario: Comentario): Observable<Comentario>{
+
+  return this.httpClient.post<Meta<Comentario>>(`${this.url}`,  JSON.stringify(comentario))
+  .pipe(
+    retry(2), 
+    catchError(this.handleError));
+ }
 }
