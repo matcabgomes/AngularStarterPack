@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../shared/service/post.service';
+import { Post } from '../shared/models/post';
+import { Meta } from '../shared/models/meta';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  posts: Meta<Post>;
+
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
+    this.buscarPosts();
+  }
+
+  buscarPosts(): void{
+    this.postService.getPosts().subscribe((posts: Meta<Post>) => {
+      this.posts = posts;
+    });
   }
 
 }

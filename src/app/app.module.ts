@@ -7,6 +7,8 @@ import { CabecalhoComponent } from './shared/estrutura/cabecalho/cabecalho.compo
 import { RodapeComponent } from './shared/estrutura/rodape/rodape.component';
 import { SidebarComponent } from './shared/estrutura/sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { InterceptorService } from './shared/service/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,16 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
